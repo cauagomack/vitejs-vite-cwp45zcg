@@ -149,6 +149,7 @@ const inputStyle: CSSProperties = {
 function App() {
   const [enviado, setEnviado] = useState(false);
   const [cadastros, setCadastros] = useState<string[]>([]);
+  const [nome, setNome] = useState("");
   const [imagem, setImagem] = useState<string | null>(null);
   return (
     <div
@@ -619,10 +620,13 @@ function App() {
       }}
     >
 
-      <input
-        placeholder="Nome do responsável"
-        style={inputStyle}
-      />
+<input
+  type="text"
+  placeholder="Nome do responsável"
+  value={nome}
+  onChange={(e) => setNome(e.target.value)}
+  style={inputStyle}
+/>
 
       <input
         placeholder="Telefone / WhatsApp"
@@ -751,8 +755,7 @@ function App() {
   type="button"
   onClick={() => {
     setCadastros([
-      ...cadastros,
-      `Cadastro recebido em ${new Date().toLocaleString("pt-BR")}`,
+      `${nome} — enviado em ${new Date().toLocaleString("pt-BR")}`
     ]);
   
     setEnviado(true);
