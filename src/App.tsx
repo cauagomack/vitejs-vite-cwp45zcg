@@ -765,6 +765,36 @@ function App() {
   }}
 >
   Enviar Cadastro
+  {cadastros.length > 0 && (
+  <div
+    style={{
+      marginTop: 30,
+      background: "#F8FAF8",
+      padding: 24,
+      borderRadius: 16,
+      border: "1px solid #E5E7EB",
+    }}
+  >
+    <h3 style={{ marginBottom: 16 }}>
+      Cadastros recebidos
+    </h3>
+
+    {cadastros.map((cadastro, index) => (
+      <div
+        key={index}
+        style={{
+          padding: 14,
+          background: "#fff",
+          borderRadius: 10,
+          marginBottom: 10,
+          border: "1px solid #E5E7EB",
+        }}
+      >
+        {cadastro}
+      </div>
+    ))}
+  </div>
+)}
 </button>
 {
   enviado && (
