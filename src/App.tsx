@@ -1,4 +1,6 @@
 import { useState, type CSSProperties } from "react";
+const API_URL =
+  "https://vitejsvitecwp45zcg-1ai0--8000--4c73681d.local-credentialless.webcontainer.io/api/status";
 
 const C = {
   bg: "#F8FAF8",
@@ -146,6 +148,7 @@ const inputStyle: CSSProperties = {
 };
 function App() {
   const [enviado, setEnviado] = useState(false);
+  const [cadastros, setCadastros] = useState<string[]>([]);
   const [imagem, setImagem] = useState<string | null>(null);
   return (
     <div
@@ -746,7 +749,14 @@ function App() {
 
 <button
   type="button"
-  onClick={() => setEnviado(true)}
+  onClick={() => {
+    setCadastros([
+      ...cadastros,
+      `Cadastro recebido em ${new Date().toLocaleString("pt-BR")}`,
+    ]);
+  
+    setEnviado(true);
+  }}
   style={{
     ...btnPrimary,
     justifyContent: "center",
@@ -769,6 +779,36 @@ function App() {
       }}
     >
       Cadastro enviado com sucesso!
+      {cadastros.length > 0 && (
+  <div
+    style={{
+      marginTop: 30,
+      background: "#F8FAF8",
+      padding: 24,
+      borderRadius: 16,
+      border: "1px solid #E5E7EB",
+    }}
+  >
+    <h3 style={{ marginBottom: 16 }}>
+      Cadastros recebidos
+    </h3>
+
+    {cadastros.map((cadastro, index) => (
+      <div
+        key={index}
+        style={{
+          padding: 14,
+          background: "#fff",
+          borderRadius: 10,
+          marginBottom: 10,
+          border: "1px solid #E5E7EB",
+        }}
+      >
+        {cadastro}
+      </div>
+    ))}
+  </div>
+)}
     </div>
   )
 }
