@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #F8FAF8;
+  color: #1F2937;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #052E16;
+}
+
+a { 
+  color: inherit; 
+  text-decoration: none; 
+}
+
+button { 
+  font-family: inherit; 
+  cursor: pointer; 
+  border: none; 
+}
+
+input, select, textarea { 
+  font-family: inherit; 
+  font-size: 1rem; 
+}
+
+@keyframes fadeUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(24px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-mobile { 
+    display: none !important; 
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop { 
+    display: none !important; 
+  }
+}
