@@ -1,4 +1,5 @@
-import { useState, type CSSProperties } from "react";
+import { supabase } from "./supabase";
+import { useState, useEffect, type CSSProperties } from "react";
 const API_URL =
   "https://vitejsvitecwp45zcg-1ai0--8000--4c73681d.local-credentialless.webcontainer.io/api/status";
 
@@ -148,9 +149,427 @@ const inputStyle: CSSProperties = {
 };
 function App() {
   const [enviado, setEnviado] = useState(false);
-  const [cadastros, setCadastros] = useState<string[]>([]);
+  const [cadastros, setCadastros] = useState<
+  {
+    id: number;
+    nome: string;
+    telefone: string;
+    municipio: string;
+    imagem: string;
+    data: string;
+    status: string;
+  }[]
+>([]);(() => {
+  const salvos = localStorage.getItem("cadastrosAgroTrama");
+
+  return salvos ? JSON.parse(salvos) : [];
+});([]);
   const [nome, setNome] = useState("");
+  const [telefone, setTelefone] = useState("");
+const [municipio, setMunicipio] = useState("");
   const [imagem, setImagem] = useState<string | null>(null);
+  const [senhaAdmin, setSenhaAdmin] = useState("");
+const [adminLogado, setAdminLogado] = useState(false);
+const [filtroStatus, setFiltroStatus] = useState("Todos");
+const [busca, setBusca] = useState("");
+const [imagem, setImagem] = useState("");
+useEffect(() => {
+  carregarCadastros();
+}, []);
+
+async function carregarCadastros() {
+  const { data, error } = await supabase
+    .from("cadastros")
+    .select("*")
+    .order("id", { ascending: false });
+
+  if (!error && data) {
+    setCadastros(data);
+  }
+}
+if (window.location.pathname === "/admin") {
+  
+  if (!adminLogado) {
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#F8FAF8",
+          padding: 24,
+        }}
+      >
+        <div
+          style={{
+            background: "#fff",
+            padding: 40,
+            borderRadius: 20,
+            width: "100%",
+            maxWidth: 420,
+            border: "1px solid #E5E7EB",
+          }}
+        >
+          <h1
+            style={{
+              marginBottom: 12,
+              color: "#052E16",
+            }}
+          >
+            Login Administrativo
+          </h1>
+
+          <p
+            style={{
+              color: "#6B7280",
+              marginBottom: 24,
+            }}
+          >
+            Área restrita da equipe AgroTrama.
+          </p>
+
+          <input
+            type="password"
+            placeholder="Senha"
+            value={senhaAdmin}
+            onChange={(e) => setSenhaAdmin(e.target.value)}
+            style={inputStyle}
+          />
+
+          <button
+            onClick={() => {
+              if (senhaAdmin === "123") {
+                setAdminLogado(true);
+              } else {
+                alert("Senha incorreta");
+              }
+            }}
+            style={{
+              ...btnPrimary,
+              width: "100%",
+              marginTop: 20,
+              justifyContent: "center",
+            }}
+          >
+            Entrar
+          </button>
+        </div>
+      </div>
+    );
+
+          }
+          return (
+            <div
+              style={{
+                background: "#F8FAF8",
+                minHeight: "100vh",
+                padding: "40px 24px",
+              }}
+            >
+              <div style={container}>
+                <h1
+                  style={{
+                    fontSize: 42,
+                    marginBottom: 10,
+                  }}
+                >
+                  Painel Administrativo
+                </h1>
+          
+                <p
+                  style={{
+                    color: "#6B7280",
+                    marginBottom: 40,
+                  }}
+                >
+                  Área interna da equipe AgroTrama.
+                </p>
+                <button
+  onClick={() => {
+    setAdminLogado(false);
+    setSenhaAdmin("");
+  }}
+  style={{
+    marginBottom: 30,
+    background: "#DC2626",
+    color: "#fff",
+    border: "none",
+    padding: "12px 18px",
+    borderRadius: 10,
+    cursor: "pointer",
+    fontWeight: 600,
+  }}
+>
+  Sair do painel
+</button>
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+    gap: 20,
+    marginBottom: 30,
+  }}
+>
+  <div
+    style={{
+      background: "#052E16",
+      color: "#fff",
+      padding: 24,
+      borderRadius: 18,
+    }}
+  >
+    <h3
+      style={{
+        color: "#fff",
+        fontSize: 36,
+        marginBottom: 8,
+      }}
+    >
+      {cadastros.length}
+    </h3>
+
+    <p>Total de cadastros recebidos</p>
+    <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+    gap: 20,
+    marginBottom: 30,
+  }}
+>
+  <div
+    style={{
+      background: "#FEF3C7",
+      padding: 24,
+      borderRadius: 18,
+    }}
+  >
+    <h3 style={{ fontSize: 32 }}>
+      {
+        cadastros.filter(
+          (c) => c.status === "Pendente"
+        ).length
+      }
+    </h3>
+
+    <p>🟡 Pendentes</p>
+  </div>
+
+  <div
+    style={{
+      background: "#DCFCE7",
+      padding: 24,
+      borderRadius: 18,
+    }}
+  >
+    <h3 style={{ fontSize: 32 }}>
+      {
+        cadastros.filter(
+          (c) => c.status === "Coletado"
+        ).length
+      }
+    </h3>
+
+    <p>🟢 Coletados</p>
+  </div>
+
+  <div
+    style={{
+      background: "#DBEAFE",
+      padding: 24,
+      borderRadius: 18,
+    }}
+  >
+    <h3 style={{ fontSize: 32 }}>
+      {
+        cadastros.filter(
+          (c) => c.status === "Finalizado"
+        ).length
+      }
+    </h3>
+
+    <p>🔵 Finalizados</p>
+  </div>
+</div>
+  </div>
+  <div
+  style={{
+    marginBottom: 30,
+  }}
+>
+  <select
+    value={filtroStatus}
+    onChange={(e) => setFiltroStatus(e.target.value)}
+    style={{
+      padding: "12px",
+      borderRadius: 10,
+      border: "1px solid #D1D5DB",
+      minWidth: 220,
+    }}
+  >
+    <option value="Todos">Todos</option>
+    <option value="Pendente">Pendente</option>
+    <option value="Coletado">Coletado</option>
+    <option value="Finalizado">Finalizado</option>
+  </select>
+</div>
+<input
+  type="text"
+  placeholder="Pesquisar por nome, telefone ou município"
+  value={busca}
+  onChange={(e) => setBusca(e.target.value)}
+  style={{
+    padding: "12px",
+    borderRadius: 10,
+    border: "1px solid #D1D5DB",
+    width: "100%",
+    maxWidth: 400,
+    marginBottom: 30,
+  }}
+/>
+</div>
+          
+                <div
+                  style={{
+                    background: "#fff",
+                    padding: 30,
+                    borderRadius: 20,
+                    border: "1px solid #E5E7EB",
+                  }}
+                >
+                  <h2 style={{ marginBottom: 20 }}>
+                    Cadastros recebidos
+                  </h2>
+          
+                  {cadastros.length === 0 && (
+                    <p style={{ color: "#6B7280" }}>
+                      Nenhum cadastro recebido ainda.
+                    </p>
+                  )}
+          
+          {cadastros
+  .filter((cadastro) =>
+  filtroStatus === "Todos"
+    ? true
+    : cadastro.status === filtroStatus
+)
+.filter((cadastro) =>
+  `${cadastro.nome} ${cadastro.telefone} ${cadastro.municipio}`
+    .toLowerCase()
+    .includes(busca.toLowerCase())
+)
+  .map((cadastro, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        padding: 18,
+                        background: "#F8FAF8",
+                        borderRadius: 14,
+                        marginBottom: 14,
+                        border: "1px solid #E5E7EB",
+                      }}
+                    >
+                      <h3 style={{ marginBottom: 10 }}>
+                        {cadastro.nome}
+                      </h3>
+                      {cadastro.imagem && (
+  <img
+    src={cadastro.imagem}
+    alt="Lona"
+    style={{
+      width: "100%",
+      maxHeight: 220,
+      objectFit: "cover",
+      borderRadius: 14,
+      marginBottom: 14,
+      marginTop: 10,
+    }}
+  />
+)}
+                      <p>📞 {cadastro.telefone}</p>
+                      <p>📍 {cadastro.municipio}</p>
+                      <button
+  onClick={async () => {
+    await supabase
+      .from("cadastros")
+      .delete()
+      .eq("id", cadastro.id);
+
+    carregarCadastros();
+  }}
+  style={{
+    marginTop: 14,
+    background: "#DC2626",
+    color: "#fff",
+    border: "none",
+    padding: "10px 16px",
+    borderRadius: 10,
+    cursor: "pointer",
+    fontWeight: 600,
+  }}
+>
+  Remover cadastro
+</button>
+                      <p
+  style={{
+    marginTop: 10,
+    fontWeight: 700,
+    color:
+      cadastro.status === "Pendente"
+        ? "#CA8A04"
+        : cadastro.status === "Coletado"
+        ? "#16A34A"
+        : "#2563EB",
+  }}
+>
+  {cadastro.status === "Pendente" && "🟡"}
+  {cadastro.status === "Coletado" && "🟢"}
+  {cadastro.status === "Finalizado" && "🔵"}
+
+  {" "}
+  {cadastro.status}
+</p>
+<select
+  value={cadastro.status}
+  onChange={async (e) => {
+    const novoStatus = e.target.value;
+  
+    await supabase
+      .from("cadastros")
+      .update({ status: novoStatus })
+      .eq("id", cadastro.id);
+  
+    carregarCadastros();
+  }}
+  style={{
+    marginTop: 12,
+    padding: "10px",
+    borderRadius: 10,
+    border: "1px solid #D1D5DB",
+    width: "100%",
+  }}
+>
+  <option value="Pendente">Pendente</option>
+  <option value="Coletado">Coletado</option>
+  <option value="Finalizado">Finalizado</option>
+</select>
+          
+                      <p
+                        style={{
+                          marginTop: 10,
+                          fontSize: 13,
+                          color: "#6B7280",
+                        }}
+                      >
+                        {cadastro.data}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );}
   return (
     <div
       id="top"
@@ -587,7 +1006,8 @@ function App() {
       ...container,
       maxWidth: 900,
     }}
-  >
+    
+  />
     <div
       style={{
         textAlign: "center",
@@ -613,12 +1033,7 @@ function App() {
       </p>
     </div>
 
-    <form
-      style={{
-        display: "grid",
-        gap: 20,
-      }}
-    >
+   
 
 <input
   type="text"
@@ -628,10 +1043,13 @@ function App() {
   style={inputStyle}
 />
 
-      <input
-        placeholder="Telefone / WhatsApp"
-        style={inputStyle}
-      />
+<input
+  type="text"
+  placeholder="Telefone / WhatsApp"
+  value={telefone}
+  onChange={(e) => setTelefone(e.target.value)}
+  style={inputStyle}
+/>
 
       <input
         placeholder="E-mail"
@@ -650,10 +1068,13 @@ function App() {
         style={inputStyle}
       />
 
-      <input
-        placeholder="Município"
-        style={inputStyle}
-      />
+<input
+  type="text"
+  placeholder="Município"
+  value={municipio}
+  onChange={(e) => setMunicipio(e.target.value)}
+  style={inputStyle}
+/>
 
       <input
         placeholder="Quantidade aproximada de lona"
@@ -720,7 +1141,13 @@ function App() {
     const file = e.target.files?.[0];
 
     if (file) {
-      setImagem(URL.createObjectURL(file));
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImagem(reader.result as string);
+      };
+      
+      reader.readAsDataURL(file);
     }
   }}
 />
@@ -753,11 +1180,37 @@ function App() {
 
 <button
   type="button"
-  onClick={() => {
-    setCadastros([
-      `${nome} — enviado em ${new Date().toLocaleString("pt-BR")}`
+  onClick={async () => {
+    const novoCadastro = {
+      nome,
+      telefone,
+      municipio,
+      imagem,
+      data: new Date().toLocaleString("pt-BR"),
+      status: "Pendente",
+    };
+
+    const novosCadastros = [...cadastros, novoCadastro];
+
+    setCadastros(novosCadastros);
+    await supabase.from("cadastros").insert([
+      {
+        nome,
+        telefone,
+        municipio,
+        imagem,
+        status: "Pendente",
+        data: new Date().toLocaleString("pt-BR"),
+      },
     ]);
-  
+
+    carregarCadastros();
+
+
+    setNome("");
+    setTelefone("");
+    setMunicipio("");
+
     setEnviado(true);
   }}
   style={{
@@ -768,36 +1221,6 @@ function App() {
   }}
 >
   Enviar Cadastro
-  {cadastros.length > 0 && (
-  <div
-    style={{
-      marginTop: 30,
-      background: "#F8FAF8",
-      padding: 24,
-      borderRadius: 16,
-      border: "1px solid #E5E7EB",
-    }}
-  >
-    <h3 style={{ marginBottom: 16 }}>
-      Cadastros recebidos
-    </h3>
-
-    {cadastros.map((cadastro, index) => (
-      <div
-        key={index}
-        style={{
-          padding: 14,
-          background: "#fff",
-          borderRadius: 10,
-          marginBottom: 10,
-          border: "1px solid #E5E7EB",
-        }}
-      >
-        {cadastro}
-      </div>
-    ))}
-  </div>
-)}
 </button>
 {
   enviado && (
@@ -822,32 +1245,18 @@ function App() {
       border: "1px solid #E5E7EB",
     }}
   >
-    <h3 style={{ marginBottom: 16 }}>
-      Cadastros recebidos
-    </h3>
-
-    {cadastros.map((cadastro, index) => (
-      <div
-        key={index}
-        style={{
-          padding: 14,
-          background: "#fff",
-          borderRadius: 10,
-          marginBottom: 10,
-          border: "1px solid #E5E7EB",
-        }}
-      >
-        {cadastro}
-      </div>
-    ))}
+    
   </div>
 )}
-    </div>
-  )
-}
 
-    </form>
+
+
+   
+
+
+    
   </div>
+  )}
 </section>
 <footer
   style={{
