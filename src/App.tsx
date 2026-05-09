@@ -148,6 +148,7 @@ const inputStyle: CSSProperties = {
   outline: "none",
 };
 function App() {
+  const [imagemAberta, setImagemAberta] = useState("");
   const [enviado, setEnviado] = useState(false);
   const [cadastros, setCadastros] = useState<
   {
@@ -155,6 +156,9 @@ function App() {
     nome: string;
     telefone: string;
     municipio: string;
+    propriedade: string;
+    quantidade: string;
+    observacoes: string;
     imagem: string;
     data: string;
     status: string;
@@ -163,16 +167,18 @@ function App() {
   const salvos = localStorage.getItem("cadastrosAgroTrama");
 
   return salvos ? JSON.parse(salvos) : [];
-});([]);
+});
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
 const [municipio, setMunicipio] = useState("");
-  const [imagem, setImagem] = useState<string | null>(null);
   const [senhaAdmin, setSenhaAdmin] = useState("");
 const [adminLogado, setAdminLogado] = useState(false);
 const [filtroStatus, setFiltroStatus] = useState("Todos");
 const [busca, setBusca] = useState("");
 const [imagem, setImagem] = useState("");
+const [propriedade, setPropriedade] = useState("");
+const [quantidade, setQuantidade] = useState("");
+const [observacoes, setObservacoes] = useState("");
 useEffect(() => {
   carregarCadastros();
 }, []);
@@ -181,7 +187,7 @@ async function carregarCadastros() {
   const { data, error } = await supabase
     .from("cadastros")
     .select("*")
-    .order("id", { ascending: false });
+    .order("created_at", { ascending: false })
 
   if (!error && data) {
     setCadastros(data);
@@ -340,7 +346,7 @@ if (window.location.pathname === "/admin") {
 >
   <div
     style={{
-      background: "#FEF3C7",
+      background: "#FACC15",
       padding: 24,
       borderRadius: 18,
     }}
@@ -358,7 +364,7 @@ if (window.location.pathname === "/admin") {
 
   <div
     style={{
-      background: "#DCFCE7",
+      background: "#22C55E",
       padding: 24,
       borderRadius: 18,
     }}
@@ -376,7 +382,7 @@ if (window.location.pathname === "/admin") {
 
   <div
     style={{
-      background: "#DBEAFE",
+      background: "#3B82F6",
       padding: 24,
       borderRadius: 18,
     }}
@@ -420,12 +426,13 @@ if (window.location.pathname === "/admin") {
   value={busca}
   onChange={(e) => setBusca(e.target.value)}
   style={{
-    padding: "12px",
-    borderRadius: 10,
+    padding: "12px 16px",
+    borderRadius: 12,
     border: "1px solid #D1D5DB",
     width: "100%",
-    maxWidth: 400,
-    marginBottom: 30,
+    maxWidth: 420,
+    height: 48,
+    background: "#fff",
   }}
 />
 </div>
@@ -475,6 +482,7 @@ if (window.location.pathname === "/admin") {
                       </h3>
                       {cadastro.imagem && (
   <img
+  onClick={() => setImagemAberta(cadastro.imagem)}
     src={cadastro.imagem}
     alt="Lona"
     style={{
@@ -484,11 +492,30 @@ if (window.location.pathname === "/admin") {
       borderRadius: 14,
       marginBottom: 14,
       marginTop: 10,
+      cursor: "pointer",
     }}
   />
 )}
                       <p>📞 {cadastro.telefone}</p>
-                      <p>📍 {cadastro.municipio}</p>
+
+<p>📍 {cadastro.municipio}</p>
+
+<p>
+  🚜 {cadastro.propriedade}
+</p>
+
+<p>
+  📦 {cadastro.quantidade} lonas
+</p>
+
+<p
+  style={{
+    marginTop: 10,
+    whiteSpace: "pre-wrap",
+  }}
+>
+  📝 {cadastro.observacoes}
+</p>
                       <button
   onClick={async () => {
     await supabase
@@ -511,25 +538,19 @@ if (window.location.pathname === "/admin") {
 >
   Remover cadastro
 </button>
-                      <p
+                    <div
   style={{
-    marginTop: 10,
-    fontWeight: 700,
-    color:
+    background:
       cadastro.status === "Pendente"
-        ? "#CA8A04"
+        ? "#FACC15"
         : cadastro.status === "Coletado"
-        ? "#16A34A"
-        : "#2563EB",
+        ? "#22C55E"
+        : "#3B82F6",
+  
+    color: "#fff",
   }}
 >
-  {cadastro.status === "Pendente" && "🟡"}
-  {cadastro.status === "Coletado" && "🟢"}
-  {cadastro.status === "Finalizado" && "🔵"}
-
-  {" "}
-  {cadastro.status}
-</p>
+</div>
 <select
   value={cadastro.status}
   onChange={async (e) => {
@@ -566,6 +587,31 @@ if (window.location.pathname === "/admin") {
                       </p>
                     </div>
                   ))}
+                  {imagemAberta && (
+  <div
+    onClick={() => setImagemAberta("")}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.8)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 999,
+      padding: 24,
+    }}
+  >
+    <img
+      src={imagemAberta}
+      alt="Preview"
+      style={{
+        maxWidth: "90%",
+        maxHeight: "90%",
+        borderRadius: 20,
+      }}
+    />
+  </div>
+)}
                 </div>
               </div>
             </div>
@@ -1063,10 +1109,6 @@ if (window.location.pathname === "/admin") {
         <option>Empresa</option>
       </select>
 
-      <input
-        placeholder="Nome da propriedade"
-        style={inputStyle}
-      />
 
 <input
   type="text"
@@ -1075,6 +1117,34 @@ if (window.location.pathname === "/admin") {
   onChange={(e) => setMunicipio(e.target.value)}
   style={inputStyle}
 />
+
+  <input
+  type="text"
+  placeholder="Nome da propriedade"
+  value={propriedade}
+  onChange={(e) => setPropriedade(e.target.value)}
+  style={inputStyle}
+/>
+
+<input
+  type="number"
+  placeholder="Quantidade de lonas"
+  value={quantidade}
+  onChange={(e) => setQuantidade(e.target.value)}
+  style={inputStyle}
+/>
+
+<textarea
+  placeholder="Observações"
+  value={observacoes}
+  onChange={(e) => setObservacoes(e.target.value)}
+  style={{
+    ...inputStyle,
+    minHeight: 120,
+    resize: "vertical",
+  }}
+/>
+
 
       <input
         placeholder="Quantidade aproximada de lona"
@@ -1185,6 +1255,9 @@ if (window.location.pathname === "/admin") {
       nome,
       telefone,
       municipio,
+      propriedade,
+      quantidade,
+      observacoes,
       imagem,
       data: new Date().toLocaleString("pt-BR"),
       status: "Pendente",
@@ -1193,7 +1266,7 @@ if (window.location.pathname === "/admin") {
     const novosCadastros = [...cadastros, novoCadastro];
 
     setCadastros(novosCadastros);
-    await supabase.from("cadastros").insert([
+    const { error } = await supabase.from("cadastros").insert([
       {
         nome,
         telefone,
@@ -1203,6 +1276,14 @@ if (window.location.pathname === "/admin") {
         data: new Date().toLocaleString("pt-BR"),
       },
     ]);
+    
+    if (error) {
+      console.error("Erro Supabase:", error);
+      alert("Erro ao salvar: " + error.message);
+      return;
+    }
+    
+    carregarCadastros();
 
     carregarCadastros();
 
