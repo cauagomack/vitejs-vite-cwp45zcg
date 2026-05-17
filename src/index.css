@@ -67,37 +67,43 @@ input, select, textarea {
     overflow-x: hidden;
   }
 
-  nav {
-    gap: 12px !important;
-    font-size: 13px;
+  header > div {
+    height: auto !important;
+    padding: 14px 18px !important;
+    gap: 14px !important;
   }
 
-  nav a {
-    display: none;
+  nav {
+    display: none !important;
   }
 
   h1 {
     font-size: 42px !important;
-    line-height: 1.1 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -1px !important;
   }
 
   h2 {
-    font-size: 32px !important;
+    font-size: 30px !important;
   }
 
   section {
-    padding: 64px 18px !important;
+    padding: 56px 20px !important;
+  }
+
+  section > div {
+    max-width: 100% !important;
   }
 
   button {
-    width: 100%;
-    justify-content: center;
+    width: 100% !important;
   }
 
   input,
   select,
   textarea {
     width: 100% !important;
+    max-width: 100% !important;
   }
 
   footer > div {
