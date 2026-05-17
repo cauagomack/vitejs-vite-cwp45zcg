@@ -124,7 +124,13 @@ function Navbar() {
             Cadastrar
           </a>
 
-          <button style={btnPrimary}>
+          <button style={btnPrimary}
+          onClick={() => {
+            document.getElementById("cadastro")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}>
+            
             Cadastrar Lona
           </button>
         </nav>
@@ -641,11 +647,40 @@ if (window.location.pathname === "/admin") {
             maxWidth: 900,
           }}
         >
+          <div
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    background: "rgba(255,255,255,0.12)",
+    border: "1px solid rgba(255,255,255,0.15)",
+    padding: "10px 18px",
+    borderRadius: 999,
+    marginBottom: 28,
+    backdropFilter: "blur(10px)",
+  }}
+>
+  <span>🌱</span>
+
+  <span
+    style={{
+      color: "#fff",
+      fontWeight: 600,
+      fontSize: 14,
+      letterSpacing: 0.4,
+    }}
+  >
+    Sustentabilidade • Reciclagem • Campo
+  </span>
+</div>
           <h1
             style={{
-              fontSize: "64px",
+              fontSize: "clamp(48px, 8vw, 82px)",
               color: "#fff",
               marginBottom: 24,
+              lineHeight: 1,
+letterSpacing: "-2px",
+maxWidth: 900,
             }}
           >
             Conectando o campo à sustentabilidade.
@@ -674,6 +709,10 @@ if (window.location.pathname === "/admin") {
                 ...btnPrimary,
                 background: "#fff",
                 color: C.primary,
+              }} onClick={() => {
+                document.getElementById("cadastro")?.scrollIntoView({
+                  behavior: "smooth",
+                });
               }}
             >
               Cadastrar Lona
@@ -686,6 +725,10 @@ if (window.location.pathname === "/admin") {
                 background: "transparent",
                 color: "#fff",
                 border: "2px solid rgba(255,255,255,0.3)",
+              }} onClick={() => {
+                document.getElementById("sobre")?.scrollIntoView({
+                  behavior: "smooth",
+                });
               }}
             >
               Saiba mais
