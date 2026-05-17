@@ -1,6 +1,6 @@
 import { supabase } from "./supabase";
 import { useState, useEffect, type CSSProperties } from "react";
-const API_URL =
+
   "https://vitejsvitecwp45zcg-1ai0--8000--4c73681d.local-credentialless.webcontainer.io/api/status";
 
 const C = {
@@ -1295,6 +1295,7 @@ maxWidth: 900,
   type="button"
   onClick={async () => {
     const novoCadastro = {
+      id: Date.now(),
       nome,
       telefone,
       municipio,
