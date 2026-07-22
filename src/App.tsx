@@ -96,7 +96,7 @@ function Navbar() {
             style={{
               fontFamily: "Outfit",
               fontWeight: 700,
-              fontSize: 18,
+              fontSize: 30,
               color: C.primary,
             }}
           >
@@ -120,9 +120,7 @@ function Navbar() {
             Como funciona
           </a>
 
-          <a href="#cadastro">
-            Cadastrar
-          </a>
+          
 
           <button style={btnPrimary}
           onClick={() => {
@@ -670,7 +668,7 @@ if (window.location.pathname === "/admin") {
       letterSpacing: 0.4,
     }}
   >
-    Sustentabilidade • Reciclagem • Campo
+    Sustentabilidade • Agro Forte • Economia Circular
   </span>
 </div>
           <h1
@@ -683,7 +681,7 @@ letterSpacing: "-2px",
 maxWidth: 900,
             }}
           >
-            Conectando o campo à sustentabilidade.
+            Reformou seu aviário e precisa destinar a Lona usada?
           </h1>
 
           <p
@@ -693,8 +691,8 @@ maxWidth: 900,
               opacity: 0.9,
             }}
           >
-            O AgroTrama Conecta transforma lonas descartadas
-            de aviários em soluções ambientais, sociais e educativas.
+            O AgroTrama Conecta recebe cadastros de lonas de aviário e organiza as possibilidades de reaproveitamento em ações ambientais, educativas e sociais.
+
           </p>
 
           <div
@@ -769,8 +767,9 @@ maxWidth: 900,
           lineHeight: 1.8,
         }}
       >
-        Um processo simples para transformar resíduos do campo
-        em impacto ambiental positivo.
+      O que fazemos com as lonas cadastradas?
+
+Você informa a lona disponível, a equipe organiza o recebimento e encaminhamento e o material pode ganhar novos usos em ações ambientais e sociais de Logistica Reversa.
       </p>
     </div>
 
@@ -824,11 +823,11 @@ maxWidth: 900,
         </div>
 
         <h3 style={{ marginBottom: 12 }}>
-          Coleta
+          Análise e encaminhamento 
         </h3>
 
         <p style={{ color: "#6B7280", lineHeight: 1.7 }}>
-          As lonas são recolhidas e encaminhadas para triagem e reutilização.
+          A equipe avalia as informações e organiza a melhor forma de recebimento, coleta ou encaminhamento conforme a disponibilidade.
         </p>
       </div>
 
@@ -883,8 +882,7 @@ maxWidth: 900,
               maxWidth: 900,
             }}
           >
-            O AgroTrama reutiliza lonas descartadas de aviários,
-            transformando resíduos do campo em soluções sustentáveis,
+            O AgroTrama Conecta é uma iniciativa do Clube de Sustentabilidadedo Colégio Estadual Vereador Francisco Galdino de Lima, em Toledo-Pr. O projeto busca dar destino correto as Lonas de aviários sem uso, promovendo reaproveitamento, educação ambiental economia circular e mobilização comunitária.             
             sociais e ambientais.
           </p>
 
@@ -912,11 +910,11 @@ maxWidth: 900,
                   marginBottom: 12,
                 }}
               >
-                Sacolas de coleta
+                Bags de coleta
               </h3>
 
               <p>
-                Produção de sacolas resistentes para coleta seletiva.
+                Confecção de Bags reutilizaveis para coleta de tampinhas, pilhas e papeis.
               </p>
             </div>
 
@@ -935,11 +933,11 @@ maxWidth: 900,
                   marginBottom: 12,
                 }}
               >
-                Kits emergenciais
+                Parceria Ambiental
               </h3>
 
               <p>
-                Coberturas provisórias para famílias afetadas.
+                Uso das lonas em ações de supressão de vegetação invasoras em áreas onde não é indicado o uso de herbicidas.
               </p>
             </div>
 
@@ -958,12 +956,11 @@ maxWidth: 900,
                   marginBottom: 12,
                 }}
               >
-                Recuperação ambiental
+                Apoio à defesa civil 
               </h3>
 
               <p>
-                Uso das lonas em recuperação ambiental.
-              </p>
+                Quando ouver possibilidade de uso, as lonas também podem ser encaminhadas para apoio de ações emergenciais.             </p>
             </div>
           </div>
         </div>
@@ -991,7 +988,7 @@ maxWidth: 900,
           marginBottom: 20,
         }}
       >
-        Impacto do Projeto
+        Números imiciais do Projeto
       </h2>
 
       <p
@@ -1025,7 +1022,7 @@ maxWidth: 900,
             marginBottom: 10,
           }}
         >
-          +3t
+          +300m
         </h3>
 
         <p
@@ -1046,7 +1043,7 @@ maxWidth: 900,
             marginBottom: 10,
           }}
         >
-          +120
+          
         </h3>
 
         <p
@@ -1055,7 +1052,7 @@ maxWidth: 900,
             lineHeight: 1.7,
           }}
         >
-          famílias impactadas
+          Reaproveitamento previsto
         </p>
       </div>
 
@@ -1067,7 +1064,7 @@ maxWidth: 900,
             marginBottom: 10,
           }}
         >
-          +15
+          3 frentes - Bags   Defesa civil e ambiental
         </h3>
 
         <p
