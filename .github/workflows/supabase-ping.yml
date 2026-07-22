@@ -1,0 +1,22 @@
+name: Supabase Ping
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase
+        run: |
+          echo "Enviando ping para o Supabase..."
+
+          curl -i \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/cadastros?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+
+          echo "Ping finalizado."
