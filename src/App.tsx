@@ -767,9 +767,7 @@ maxWidth: 900,
           lineHeight: 1.8,
         }}
       >
-      O que fazemos com as lonas cadastradas?
-
-Você informa a lona disponível, a equipe organiza o recebimento e encaminhamento e o material pode ganhar novos usos em ações ambientais e sociais de Logistica Reversa.
+Você informa a lona disponível, a equipe organiza o recebimento e encaminha o material que ganhar novos usos em ações ambientais e sociais de Logistica Reversa.
       </p>
     </div>
 
@@ -882,7 +880,7 @@ Você informa a lona disponível, a equipe organiza o recebimento e encaminhamen
               maxWidth: 900,
             }}
           >
-            O AgroTrama Conecta é uma iniciativa do Clube de Sustentabilidadedo Colégio Estadual Vereador Francisco Galdino de Lima, em Toledo-Pr. O projeto busca dar destino correto as Lonas de aviários sem uso, promovendo reaproveitamento, educação ambiental economia circular e mobilização comunitária.             
+            O AgroTrama Conecta é uma iniciativa do Clube de Sustentabilidade do Colégio Estadual Vereador Francisco Galdino de Lima, em Toledo-Pr. Nós buscamos dar destino correto as Lonas de aviários sem uso, promovendo reaproveitamento, educação ambiental economia circular e mobilização comunitária.             
             sociais e ambientais.
           </p>
 
@@ -1034,51 +1032,6 @@ Você informa a lona disponível, a equipe organiza o recebimento e encaminhamen
           de lona reaproveitada
         </p>
       </div>
-
-      <div style={card}>
-        <h3
-          style={{
-            fontSize: 42,
-            color: "#166534",
-            marginBottom: 10,
-          }}
-        >
-          
-        </h3>
-
-        <p
-          style={{
-            color: "#6B7280",
-            lineHeight: 1.7,
-          }}
-        >
-          Reaproveitamento previsto
-        </p>
-      </div>
-
-      <div style={card}>
-        <h3
-          style={{
-            fontSize: 42,
-            color: "#166534",
-            marginBottom: 10,
-          }}
-        >
-          3 frentes - Bags   Defesa civil e ambiental
-        </h3>
-
-        <p
-          style={{
-            color: "#6B7280",
-            lineHeight: 1.7,
-          }}
-        >
-          escolas participantes
-        </p>
-      </div>
-
-    </div>
-  </div>
 </section>
       <section
   id="cadastro"
