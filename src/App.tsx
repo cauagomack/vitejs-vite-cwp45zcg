@@ -767,7 +767,10 @@ maxWidth: 900,
           lineHeight: 1.8,
         }}
       >
-Você informa a lona disponível, a equipe organiza o recebimento e encaminha o material que ganhar novos usos em ações ambientais e sociais de Logistica Reversa.
+     Você informa a quantidade de lona disponível,
+      a equipe organiza o recebimento
+      e encaminha o material que irá ganhar novos usos em ações
+       ambientais e sociais de Logistica Reversa.
       </p>
     </div>
 
@@ -880,7 +883,7 @@ Você informa a lona disponível, a equipe organiza o recebimento e encaminha o 
               maxWidth: 900,
             }}
           >
-            O AgroTrama Conecta é uma iniciativa do Clube de Sustentabilidade do Colégio Estadual Vereador Francisco Galdino de Lima, em Toledo-Pr. Nós buscamos dar destino correto as Lonas de aviários sem uso, promovendo reaproveitamento, educação ambiental economia circular e mobilização comunitária.             
+            O AgroTrama Conecta é uma iniciativa do Clube de Sustentabilidadedo Colégio Estadual Vereador Francisco Galdino de Lima, em Toledo-Pr. O projeto busca dar destino correto as Lonas de aviários sem uso, promovendo reaproveitamento, educação ambiental economia circular e mobilização comunitária.             
             sociais e ambientais.
           </p>
 
@@ -973,34 +976,7 @@ Você informa a lona disponível, a equipe organiza o recebimento e encaminha o 
 >
   <div style={container}>
 
-    <div
-      style={{
-        textAlign: "center",
-        marginBottom: 70,
-      }}
-    >
-      <h2
-        style={{
-          fontSize: 42,
-          color: "#fff",
-          marginBottom: 20,
-        }}
-      >
-        Números imiciais do Projeto
-      </h2>
-
-      <p
-        style={{
-          fontSize: 20,
-          opacity: 0.85,
-          maxWidth: 700,
-          margin: "0 auto",
-          lineHeight: 1.8,
-        }}
-      >
-        Cada lona reaproveitada representa menos resíduos
-        no meio ambiente e mais impacto social positivo.
-      </p>
+    
     </div>
 
     <div
@@ -1011,27 +987,7 @@ Você informa a lona disponível, a equipe organiza o recebimento e encaminha o 
         gap: 24,
       }}
     >
-
-      <div style={card}>
-        <h3
-          style={{
-            fontSize: 42,
-            color: "#166534",
-            marginBottom: 10,
-          }}
-        >
-          +300m
-        </h3>
-
-        <p
-          style={{
-            color: "#6B7280",
-            lineHeight: 1.7,
-          }}
-        >
-          de lona reaproveitada
-        </p>
-      </div>
+  </div>
 </section>
       <section
   id="cadastro"
