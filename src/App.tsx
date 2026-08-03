@@ -883,7 +883,7 @@ maxWidth: 900,
               maxWidth: 900,
             }}
           >
-            O AgroTrama Conecta é uma iniciativa do Clube de Sustentabilidadedo Colégio Estadual Vereador Francisco Galdino de Lima, em Toledo-Pr. O projeto busca dar destino correto as Lonas de aviários sem uso, promovendo reaproveitamento, educação ambiental economia circular e mobilização comunitária.             
+            O AgroTrama Conecta é uma iniciativa do Clube de Sustentabilidade do Colégio Estadual Vereador Francisco Galdino de Lima, em Toledo-Pr. O projeto busca destinar corretamente lonas que deixaram de ter útilidade em aviários, promovendo reaproveitamento, educação ambiental, economia circular e mobilização comunitária,             
             sociais e ambientais.
           </p>
 
@@ -915,7 +915,7 @@ maxWidth: 900,
               </h3>
 
               <p>
-                Confecção de Bags reutilizaveis para coleta de tampinhas, pilhas e papeis.
+                Confecção de Bags para coleta de tampinhas, pilhas e papeis.
               </p>
             </div>
 
@@ -934,11 +934,11 @@ maxWidth: 900,
                   marginBottom: 12,
                 }}
               >
-                Parceria Ambiental
+                Ações Ambientais
               </h3>
 
               <p>
-                Uso das lonas em ações de supressão de vegetação invasoras em áreas onde não é indicado o uso de herbicidas.
+                Uso das lonas em ações de supressão de vegetação invasora em áreas onde não é indicado o uso de herbicidas.
               </p>
             </div>
 
